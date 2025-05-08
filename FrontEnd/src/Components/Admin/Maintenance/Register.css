@@ -1,0 +1,107 @@
+.register-wrap {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 20px;
+    /* background: linear-gradient(to right, #ffffff 30%,  #345f79b4); */
+    /* border: 1px solid #ccc; */
+    /* border-radius: 1cap; */
+    color: white;
+    font-family: var(--ff-text);
+    width: clamp(100px, 85vw, 1600px);
+}
+
+.register-cont {
+    display: flex;
+}
+
+@media screen and (width < 1024px) {
+    .register-cont {
+        flex-direction: column;
+    }
+}
+
+.register-text h1 {
+    margin-bottom: 20px;
+    /* padding-left: 10px; */
+    font-size: clamp(1.5rem, 2vw, 2rem);
+    color: rgb(27, 26, 26);
+}
+
+.register-wrap form {
+    /* display: flex; */
+    flex-direction: column;
+    /* width: clamp(150px, 100%, 300px); */
+    /* padding: 10px; */
+    border-radius: 10px;
+    width: 240px;
+}
+
+.register-wrap input, 
+.register-wrap select, 
+.register-wrap textarea {
+    margin-bottom: 18px;
+    padding: 4px 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    background-color: #f9fafb;
+    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    color: black;
+}
+
+.register-wrap textarea {
+    resize: none;
+    height: 100px;
+    width: 200px;
+}
+
+@media screen and (width >= 1280px) {
+    .register-wrap textarea {
+        width: 535px;
+    }
+}
+
+.register-wrap input:focus {
+    outline: 2px solid var(--clr-bgd-blue);
+}
+
+.register-wrap input::placeholder {
+    color: #adadad;
+}
+
+.reg-btn {
+    background-color: var(--clr-bgd-green);
+    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    color: var(--clr-font-light);
+    padding: 8px 20px;
+    border: none;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    width: fit-content;
+    display: block;
+    transition: background-color 0.2s ease-in-out;
+    text-align: center;
+}
+
+.reg-btn:hover {
+    background-color: green;
+    cursor: pointer;
+}
+
+.file-input-label {
+    background-color: var(--clr-bgd-blue);
+    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    color: var(--clr-font-light);
+    padding: 8px 20px;
+    border: none;
+    border-radius: 50px;
+    margin-bottom: 15px;
+    width: fit-content;
+    display: block;
+    transition: background-color 0.2s ease-in-out;
+    text-align: center;
+}
+
+.file-input-label:hover {
+    background-color: blue;
+    cursor: pointer;
+}

@@ -1,0 +1,115 @@
+.maint-text h1 {
+    margin-bottom: 20px;
+    font-size: clamp(1.5rem, 2vw, 2rem);
+    color: rgb(27, 26, 26);
+}
+
+.bgd-change-cont {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--ff-text);
+    gap: 20px;
+    margin: 5px 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    width: clamp(150px, 55%, 850px);
+}
+
+.bgd-select {
+    padding: 4px 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    font-size: clamp(0.75rem, 1.2vw, 1rem);
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.bgd-select:focus {
+    border-color: var(--clr-bgd-blue);
+    outline: none;
+}
+
+.bgd-sub {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.bgd-sub h2 {
+    /* font-size: clamp(1rem, 1.2vw, 1.8rem); */
+    font-weight: 400;
+}
+
+.bg-preview {
+    display: inline-flex;
+    /* justify-content: center; */
+    margin-top: 10px;
+    /* max-width: 800px; */
+    height: 50vh;
+    max-height: 100%;
+    /* width: 100%; */
+    /* height: 100%; */
+    overflow: hidden;
+}
+
+.bgd-btns {
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.file-label, .bgd-change-btn {
+    text-align: center;
+    padding: 4px 20px;
+    border-radius: 5px;
+    color: var(--clr-font-light);
+    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.file-label {
+    background-color: var(--clr-bgd-blue);
+}
+
+.file-label:hover {
+    background-color: #2d73bd;
+}
+
+.file-label.disabled { color: grey;
+    display: none;
+}
+
+.bgd-change-btn {
+    /* padding: 4px 20px; */
+    /* border-radius: 5px; */
+    background-color: var(--clr-bgd-green);
+    /* color: var(--clr-font-light); */
+    /* font-size: clamp(0.8rem, 1.2vw, 1rem); */
+    /* cursor: pointer; */
+    /* transition: background-color 0.3s ease; */
+}
+
+.bgd-change-btn:hover {
+    background-color: #3ca753;
+}
+
+.bgd-change-btn:disabled {
+    display: none;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .bg-preview {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        gap: 20px;
+    }
+}

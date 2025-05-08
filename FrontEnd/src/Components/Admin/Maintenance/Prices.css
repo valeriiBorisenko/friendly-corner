@@ -1,0 +1,117 @@
+.prices-list {
+    margin: 5px 20px;
+    border-collapse: collapse; /* The adjacent cells has only one line of border */
+    color: #333;
+    width: 70vw;
+    height: 50vh;
+}
+
+.prices-text h1 {
+    margin-bottom: 20px;
+    font-size: clamp(1.5rem, 2vw, 2rem);
+    color: rgb(27, 26, 26);
+}
+
+.prices-text { 
+    display: flex; 
+    align-items: baseline ;
+    justify-content: left;
+}
+
+.prices-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.prices-table th, .prices-table td {
+    padding: 4px 4px;
+    border: 1px solid #ececec;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Ellipsis (...) for overflowed text */
+}
+
+.prices-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.prices-table td {
+    background-color: #f9fafb;
+}
+
+.prices-table tr:nth-child(even) td {
+    background-color: #f2f2f2;
+}
+
+.prices-table tr:hover td {
+    background-color: #ddd;
+}
+
+.prices-input-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.prices-input {
+    width: 70%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 8px;
+}
+
+.prices-input-text {
+    font-size: 14px;
+    color: #333;
+}
+
+.prices-save-button {
+    background-color: var(--clr-bgd-blue);
+    color: var(--clr-font-light);
+    padding: 8px 20px;
+    border-radius: 50px;
+    margin-top: 28px;
+    width: 100px;
+    display: block;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.prices-save-button:hover {
+    background-color: var(--clr-btn-hover);
+    cursor: pointer;
+}
+
+.price-alert {
+    color: rgb(26, 27, 26);
+    margin-left: 100px;
+    padding: 0 10px;
+    border: 1px solid black;
+    border-radius: 4px; 
+    font-size: 1rem;
+    animation: fadeInOut 3s forwards;
+}
+
+.price-alert.error {
+    background-color: #f44336; /* Red for errors */
+    color: white;
+    margin: 0 0 50px 0;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

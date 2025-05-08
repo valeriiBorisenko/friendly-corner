@@ -1,0 +1,41 @@
+.butik-bgd-img {
+    /* background-image: url('../../Images/Butik-bgd-img.jpg'); */
+
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.butik-cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.butik-sub {
+    height: clamp(370px, 40vw, 500px);
+    background-color: var(--clr-bgd-green);
+    color: var(--clr-font-light);
+}
+
+.butik-cont {
+    background-color: white;
+    height: 25vw;
+    margin: 40px;
+}
+
+.butik-pic {
+    display: inline-flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    /* height: 80%; */
+    /* width: clamp(300px, 5vw, 2000px); */
+}
+
+.butik-pic img {
+    aspect-ratio: 1;
+    height: clamp(110px, 30vw, 450px);
+    width: clamp(110px, 30vw, 450px);
+}

@@ -1,0 +1,65 @@
+.admin-cont {
+    display: flex;
+    font-family: var(--ff-text);
+    min-height: 100vh;
+}
+
+.logout-cont {
+    width: 100%;
+    display: inline-flex;
+    position: absolute;
+    justify-content: end;
+}   
+
+.logout-btn {
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: var(--clr-bgd-brown);
+    color: var(--clr-font-light);
+  }
+
+.logout-btn:hover {
+    cursor: pointer;
+}
+
+.adm-sidebar {
+    width: clamp(90px, 10%, 150px);
+    background-color: var(--clr-bgd-blue);
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px;
+}
+
+.adm-link {
+    color: var(--clr-font-light);
+    text-decoration: none;
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.5s;
+    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    z-index: 2;
+}
+
+.adm-sidebar .adm-link:hover {
+    background-color: #34495e;
+}
+
+.adm-panel {
+    flex: 1;
+    padding: 25px 0 0 5px;
+    background-color: var(--clr-bgd-white);
+}
+
+@media screen and (max-width: 840px) {
+    .colls {
+        display: none;
+    }
+}

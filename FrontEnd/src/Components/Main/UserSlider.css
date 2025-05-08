@@ -1,0 +1,31 @@
+.user-slider {
+    width: 85%;
+    margin: auto;
+    padding: 20px;
+}
+
+.user-card {
+    padding: 0 18px;
+    text-align: center;
+    background: #fff;
+}
+
+.slider-arrow {
+    position: absolute;
+    font-size: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 30px;
+    color: black;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.prev {
+    left: -55px;
+}
+
+.next {
+    right: -75px;
+}

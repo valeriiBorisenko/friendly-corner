@@ -1,0 +1,133 @@
+.slack-feed-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.slack-feed-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--clr-font-dark);
+  text-align: center;
+}
+
+.slack-message-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.message-input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.message-input:focus {
+  border-color: #4a90e2;
+}
+
+.message-input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.send-button {
+  padding: 12px 20px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.send-button:hover:not(:disabled) {
+  background-color: #357ac7;
+}
+
+.send-button:disabled {
+  background-color: #a0c1e7;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #e74c3c;
+  margin-top: 10px;
+  padding: 8px;
+  background-color: #fdecea;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.success-message {
+  color: #2ecc71;
+  margin-top: 10px;
+  padding: 8px;
+  background-color: #eafaf1;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.messages-container {
+  height: 350px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: white;
+}
+
+.message-item {
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.message-user {
+  font-weight: bold;
+  color: #4a90e2;
+}
+
+.message-user strong {
+  color: #2c6cb9;
+  font-weight: 800;
+}
+
+.message-time {
+  color: #999;
+  font-size: 12px;
+}
+
+.message-text {
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.no-messages {
+  text-align: center;
+  color: #999;
+  padding: 20px;
+}

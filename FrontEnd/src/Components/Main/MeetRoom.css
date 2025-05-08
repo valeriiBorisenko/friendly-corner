@@ -1,0 +1,41 @@
+.section-2 {
+    height: clamp(250px, 55vw, 70vh);
+  }
+  
+.meetingRoom-bgd-img {
+    /* background-image: url('../../Images/bgd-meeting-min.jpg'); */
+    
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position:top;
+    background-size: 100% clamp(350px, 70vw, 100%);
+}
+
+.meetingRoom-sub {
+    height: clamp(470px, 50vw, 650px);
+    background-color: var(--clr-bgd-green);
+    color: var(--clr-font-light);
+}
+
+.section-2-2 {
+    height: clamp(200px, 50vw, 100vh);
+}
+
+.meetRoom-post-img {
+    /* background-image: url('../../Images/bgd-sofa-min.jpg'); */
+
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    animation: post-img-slide 4s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes post-img-slide {
+    0% {background-position: 0 0;}
+    100% {background-position: 0 -60px}
+}

@@ -1,0 +1,2 @@
+# FriendlyCorner
+Internship project 

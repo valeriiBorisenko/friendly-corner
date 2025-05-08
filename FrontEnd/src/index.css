@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+
+:root {
+  --clr-font-light: #fff5e9;
+  --clr-font-dark: #000000;
+  --clr-bgd-brown: #ac6b69;
+  --clr-bgd-blue: #345f79;
+  --clr-btn-hover: #5b8dac;
+  --clr-bgd-green: #457157;
+  --clr-bgd-white: #ffffff;
+  --clr-bgd-header: #231f20;
+  --clr-bgd-red: #fd6d6d;
+
+  --ff-text: "DM Sans", serif;
+  --ff-title: "EB Garamond", serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  height: 100%;
+
+
+/* IE and Edge */
+  -ms-overflow-style: none;  
+  
+/* Firefox */
+  scrollbar-width: none;
+  /* font-family: 'DM Sans', serif; */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.no-scroll {
+/* Prevent scrolling */
+  overflow: hidden;
+}
+
+/* Chrome, Safari and Opera  */
+html::-webkit-scrollbar {
+  display: none;
+}

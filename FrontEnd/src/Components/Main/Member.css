@@ -1,0 +1,33 @@
+.photo-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    position: relative;
+    align-items: center;
+}
+
+.photo-box img {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.photo-box:hover img {
+    filter: blur(3px);
+    opacity: 0.3;
+}
+
+.member-overlay {
+    position: absolute;
+    text-align: center;
+    font-size: clamp(.6rem, 2vw, 1rem);
+    overflow: hidden;
+    width: 80%;
+    height: 0;
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.photo-box:hover .member-overlay {
+    height: 100%;
+}

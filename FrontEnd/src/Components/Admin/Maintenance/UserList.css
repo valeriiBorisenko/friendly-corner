@@ -1,0 +1,194 @@
+.user-list {
+    margin: 5px 20px;
+    border-collapse: collapse; /* The adjacent cells has only one line of border */
+    color: #333;
+    width: calc(70vw + 90px);
+    height: 50vh;
+}
+
+.user-text h1 {
+    margin-bottom: 20px;
+    font-size: clamp(1.5rem, 2vw, 2rem);
+    color: rgb(27, 26, 26);
+}
+
+.user-text { 
+    display: flex; 
+    align-items: baseline ;
+    justify-content: left;
+}
+
+.user-alert { 
+    color: rgb(26, 27, 26);
+    margin-left: 100px;
+    padding: 0 10px;
+    border: 1px solid black;
+    border-radius: 4px; 
+    font-size: 1rem;
+}
+
+.user-alert.error {
+    background-color: #f44336; /* Red for errors */
+    color: white;
+    margin: 0 0 50px 0;
+}
+
+.user-tbl {
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #fff;
+    table-layout: fixed;
+}
+
+.user-tbl thead {
+    position: sticky;
+    top: 0;
+    background-color: #f4f4f4;
+}
+
+.user-tbl th, .user-bdy td {
+    padding: 4px 4px;
+    border: 1px solid #ececec;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Ellipsis (...) for overflowed text */
+}
+
+.user-tbl th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.user-bdy td {
+    background-color: #f9fafb;
+}
+
+.user-tbl {
+    display: block;
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin; /* For Firefox, ensure scrollbar is thin */
+}
+
+/* For Chrome, Safari, and Opera */
+.user-tbl::-webkit-scrollbar {
+    width: 12px; /* For vertical scrollbar in Chrome, Safari, and Opera */
+}
+
+.user-tbl tr, .user-bdy tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.sticky-column {
+    justify-content: start;
+    position: sticky;
+    background-color: inherit; /* Keeps the column background consistent */
+    z-index: 1; /* Ensures the column stays on top of other content */
+}
+
+.user-btn {
+    width: 35px;
+    height: 28px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: black;
+}
+
+.edit {
+    border: 2px solid var(--clr-bgd-blue);
+    color: var(--clr-bgd-blue);
+}
+
+.edit:hover {
+    color: white;
+    background-color: var(--clr-bgd-blue);
+}
+
+.delete {
+    border: 2px solid #fd6d6d;
+    color: #fd6d6d;
+}
+
+.delete:hover {
+    color: white;
+    background-color: #fd6d6d;
+}
+
+.update {
+    margin-top: 4px;
+    border: 2px solid var(--clr-bgd-green);
+    color: var(--clr-bgd-green);
+    background-color: white;
+}
+
+.update:hover {
+    color: white;
+    background-color: var(--clr-bgd-green);
+}
+
+.cancel {
+    margin-top: 4px;
+    border: 2px solid #fd6d6d;
+    color: #fd6d6d;
+    background-color: white;
+}
+
+.cancel:hover {
+    background-color: #fd6d6d;
+    color: white;
+}
+
+.noview { 
+    border: none;
+    background-color: inherit;
+}
+
+.editing {
+    height: auto; /* Rows can expand when in edit mode */
+}
+
+.editing .sticky-column {
+    text-align: end;
+}
+
+.input-field {
+    height: 50px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.update-file-input-label {
+    background-color: inherit;
+    border-radius: 2px;
+    padding: 5px;
+    color: var(--clr-bgd-blue);
+    cursor: pointer;
+}
+
+.update-file-input-label:hover {
+    color: white;
+    background-color: var(--clr-bgd-blue);
+}
+
+.view {
+    background-color: inherit;
+    color: var(--clr-bgd-blue);
+}
+
+.view:hover {
+    color: white;
+    background-color: var(--clr-bgd-blue);
+}
+
+.picture-btns {
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    text-align: center;
+}
