@@ -1,6 +1,6 @@
 namespace Friendly_Corner_backend.Models
 {
-    public class Booking
+    public class     Booking
     {
         public int BookingId { get; set; }
         public int RoomId { get; set; }
