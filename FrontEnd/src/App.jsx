@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ReactReact, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react'; // <-- Fix import
 
 import Header from './Components/Main/Header';
 import Home from './Components/Main/Home';
@@ -14,7 +13,7 @@ import UserPage from './Components/User/UserPage';
 import Footer from './Components/Main/Footer';
 import LoginModal from './Components/Main/LoginModal';
 
-import { BackgroundProvider } from './context/BackgroundContext'; // Import BackgroundProvider
+import { BackgroundProvider } from './context/BackgroundContext';
 import SlackFeed from './Components/Admin/Maintenance/Slackfeed';
 
 function App() {
@@ -25,6 +24,32 @@ function App() {
       loginModalRef.current.openModal();
     }
   }
+
+  useEffect(() => {
+    // Fetch from your backend
+    const jwtToken = localStorage.getItem('jwtToken');
+    if (jwtToken) {
+      fetch('https://localhost:5000/api/booking', {
+        headers: {
+          'Authorization': `Bearer ${jwtToken}`
+        }
+      })
+        .then(res => res.json())
+        .then(data => console.log('Booking:', data));
+    }
+
+    // Fetch from Spotify API
+    const spotifyToken = localStorage.getItem('spotifyToken');
+    if (spotifyToken) {
+      fetch('https://api.spotify.com/v1/me', {
+        headers: {
+          'Authorization': `Bearer ${spotifyToken}`
+        }
+      })
+        .then(res => res.json())
+        .then(data => console.log('Spotify:', data));
+    }
+  }, []);
 
   return (
     <BackgroundProvider>
@@ -38,8 +63,8 @@ function App() {
             <Route path="/butik" element={<Butik />} />
             <Route path="/contactus" element={<ContactUs />} />
             <Route path="/admin/*" element={<AdminPage />} />
-                      <Route path="/user" element={<UserPage />} />
-                      <Route path="/maintenance/slackfeed" element={<SlackFeed />} />
+            <Route path="/user" element={<UserPage />} />
+            <Route path="/maintenance/slackfeed" element={<SlackFeed />} />
           </Routes>
           <LoginModal ref={loginModalRef} />
           <Footer />
