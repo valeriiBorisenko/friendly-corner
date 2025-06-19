@@ -25,6 +25,12 @@ namespace Friendly_Corner_backend.Controllers
             var clientId = _config["Spotify:ClientId"];
             var redirectUri = _config["Spotify:RedirectUri"];
             var scope = "user-read-private user-read-email";
+
+            if (string.IsNullOrEmpty(clientId) || string.IsNullOrEmpty(redirectUri))
+            {
+                return BadRequest("Spotify ClientId or RedirectUri is not configured.");
+            }
+    
             var url = $"https://accounts.spotify.com/authorize?client_id={clientId}&response_type=code&redirect_uri={Uri.EscapeDataString(redirectUri)}&scope={Uri.EscapeDataString(scope)}";
             return Redirect(url);
         }
@@ -37,6 +43,11 @@ namespace Friendly_Corner_backend.Controllers
             var clientSecret = _config["Spotify:ClientSecret"];
             var redirectUri = _config["Spotify:RedirectUri"];
 
+            if (string.IsNullOrEmpty(code) || string.IsNullOrEmpty(redirectUri))
+            {
+                return BadRequest("Code or RedirectUri is missing.");
+            }
+            
             var authHeader = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}"));
 
             var request = new HttpRequestMessage(HttpMethod.Post, "https://accounts.spotify.com/api/token");
