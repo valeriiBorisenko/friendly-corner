@@ -17,7 +17,6 @@ namespace Friendly_Corner_backend.Controllers
             _config = config;
             _httpClient = new HttpClient();
         }
-
         // Step 1: Redirect user to Spotify login
         [HttpGet("login")]
         public IActionResult Login()
