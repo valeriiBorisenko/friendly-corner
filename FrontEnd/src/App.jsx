@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import React, { useRef, useEffect } from 'react'; // <-- Fix import
+import React, { useRef, useEffect, useState } from 'react';
 
 import Header from './Components/Main/Header';
 import Home from './Components/Main/Home';
@@ -15,6 +15,34 @@ import LoginModal from './Components/Main/LoginModal';
 
 import { BackgroundProvider } from './context/BackgroundContext';
 import SlackFeed from './Components/Admin/Maintenance/Slackfeed';
+
+// SpotifyProfile component
+function SpotifyProfile() {
+  const [profile, setProfile] = useState(null);
+
+  useEffect(() => {
+    const spotifyToken = localStorage.getItem('spotifyToken');
+    if (spotifyToken) {
+      fetch('https://api.spotify.com/v1/me', {
+        headers: {
+          'Authorization': `Bearer ${spotifyToken}`
+        }
+      })
+        .then(res => res.json())
+        .then(data => setProfile(data));
+    }
+  }, []);
+
+  if (!profile) return <div>Loading...</div>;
+
+  return (
+    <div>
+      <h2>Spotify Profile</h2>
+      <p>Name: {profile.display_name}</p>
+      <p>Email: {profile.email}</p>
+    </div>
+  );
+}
 
 function App() {
   const loginModalRef = useRef(null);
@@ -66,6 +94,8 @@ function App() {
             <Route path="/user" element={<UserPage />} />
             <Route path="/maintenance/slackfeed" element={<SlackFeed />} />
           </Routes>
+          {/* Add the SpotifyProfile component here */}
+          <SpotifyProfile />
           <LoginModal ref={loginModalRef} />
           <Footer />
         </div>
