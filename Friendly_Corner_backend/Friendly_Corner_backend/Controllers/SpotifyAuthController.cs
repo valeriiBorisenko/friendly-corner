@@ -17,6 +17,7 @@ namespace Friendly_Corner_backend.Controllers
             _config = config;
             _httpClient = new HttpClient();
         }
+
         // Step 1: Redirect user to Spotify login
         [HttpGet("login")]
         public IActionResult Login()
@@ -65,6 +66,32 @@ namespace Friendly_Corner_backend.Controllers
                 return BadRequest(content);
 
             // Return the token to the frontend
+            return Content(content, "application/json");
+        }
+
+        // Step 3: Refresh access token using refresh token
+        [HttpPost("refresh")]
+        public async Task<IActionResult> Refresh([FromBody] string refreshToken)
+        {
+            var clientId = _config["Spotify:ClientId"];
+            var clientSecret = _config["Spotify:ClientSecret"];
+
+            var authHeader = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}"));
+
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://accounts.spotify.com/api/token");
+            request.Headers.Authorization = new AuthenticationHeaderValue("Basic", authHeader);
+            request.Content = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("grant_type", "refresh_token"),
+                new KeyValuePair<string, string>("refresh_token", refreshToken)
+            });
+
+            var response = await _httpClient.SendAsync(request);
+            var content = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+                return BadRequest(content);
+
             return Content(content, "application/json");
         }
     }
