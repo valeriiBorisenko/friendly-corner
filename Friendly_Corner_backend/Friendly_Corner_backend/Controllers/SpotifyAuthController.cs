@@ -71,29 +71,31 @@ namespace Friendly_Corner_backend.Controllers
         }
 
         // Step 3: Refresh access token using refresh token
-        [HttpPost("refresh")]
-        public async Task<IActionResult> Refresh([FromBody] string refreshToken)
-        {
-            var clientId = _config["Spotify:ClientId"];
-            var clientSecret = _config["Spotify:ClientSecret"];
+[HttpPost("refresh")]
+public async Task<IActionResult> Refresh([FromBody] RefreshRequest body)
+{
+    var refreshToken = body.refreshToken;
 
-            var authHeader = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}"));
+    var clientId = _config["Spotify:ClientId"];
+    var clientSecret = _config["Spotify:ClientSecret"];
 
-            var request = new HttpRequestMessage(HttpMethod.Post, "https://accounts.spotify.com/api/token");
-            request.Headers.Authorization = new AuthenticationHeaderValue("Basic", authHeader);
-            request.Content = new FormUrlEncodedContent(new[]
-            {
-                new KeyValuePair<string, string>("grant_type", "refresh_token"),
-                new KeyValuePair<string, string>("refresh_token", refreshToken)
-            });
+    var authHeader = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}"));
 
-            var response = await _httpClient.SendAsync(request);
-            var content = await response.Content.ReadAsStringAsync();
+    var request = new HttpRequestMessage(HttpMethod.Post, "https://accounts.spotify.com/api/token");
+    request.Headers.Authorization = new AuthenticationHeaderValue("Basic", authHeader);
+    request.Content = new FormUrlEncodedContent(new[]
+    {
+        new KeyValuePair<string, string>("grant_type", "refresh_token"),
+        new KeyValuePair<string, string>("refresh_token", refreshToken)
+    });
 
-            if (!response.IsSuccessStatusCode)
-                return BadRequest(content);
+    var response = await _httpClient.SendAsync(request);
+    var content = await response.Content.ReadAsStringAsync();
 
-            return Content(content, "application/json");
-        }
+    if (!response.IsSuccessStatusCode)
+        return BadRequest(content);
+
+    return Content(content, "application/json");
+}
     }
 }

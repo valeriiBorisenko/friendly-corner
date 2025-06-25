@@ -16,6 +16,9 @@ import LoginModal from './Components/Main/LoginModal';
 import { BackgroundProvider } from './context/BackgroundContext';
 import SlackFeed from './Components/Admin/Maintenance/Slackfeed';
 
+import SpotifyPlayer from './Components/Main/SpotifyPlayer'; // Add this import
+
+
 // SpotifyProfile component
 function SpotifyProfile() {
   const [profile, setProfile] = useState(null);
@@ -93,6 +96,7 @@ function App() {
             <Route path="/admin/*" element={<AdminPage />} />
             <Route path="/user" element={<UserPage />} />
             <Route path="/maintenance/slackfeed" element={<SlackFeed />} />
+            <Route path="/spotify-player" element={<SpotifyPlayer />} />
           </Routes>
           {/* Add the SpotifyProfile component here */}
           <SpotifyProfile />
