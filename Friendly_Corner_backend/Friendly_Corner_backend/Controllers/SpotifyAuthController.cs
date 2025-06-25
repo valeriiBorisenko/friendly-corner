@@ -24,16 +24,16 @@ namespace Friendly_Corner_backend.Controllers
         public IActionResult Login()
         {
             var clientId = _config["Spotify:ClientId"];
-            var redirectUri = _config["Spotify:RedirectUri"];
-            var scope = "user-read-private user-read-email";
+    var redirectUri = _config["Spotify:RedirectUri"];
+    var scope = "user-read-private user-read-email playlist-read-private playlist-read-collaborative";
 
-            if (string.IsNullOrEmpty(clientId) || string.IsNullOrEmpty(redirectUri))
-            {
-                return BadRequest("Spotify ClientId or RedirectUri is not configured.");
-            }
-    
-            var url = $"https://accounts.spotify.com/authorize?client_id={clientId}&response_type=code&redirect_uri={Uri.EscapeDataString(redirectUri)}&scope={Uri.EscapeDataString(scope)}";
-            return Redirect(url);
+    if (string.IsNullOrEmpty(clientId) || string.IsNullOrEmpty(redirectUri))
+    {
+        return BadRequest("Spotify ClientId or RedirectUri is not configured.");
+    }
+
+    var url = $"https://accounts.spotify.com/authorize?client_id={clientId}&response_type=code&redirect_uri={Uri.EscapeDataString(redirectUri)}&scope={Uri.EscapeDataString(scope)}";
+    return Redirect(url);
         }
 
         // Step 2: Spotify redirects here with code, exchange for token
