@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using Friendly_Corner_backend.Models;
 
 namespace Friendly_Corner_backend.Controllers
 {
