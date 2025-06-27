@@ -4,13 +4,26 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using Friendly_Corner_backend.Models;
+using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
-// Add Slack configuration
-builder.Services.Configure<SlackOptions>(builder.Configuration.GetSection("Slack"));
 
-// Register Slack service
-builder.Services.AddSingleton<SlackService>();
+Env.Load();
+
+var dbName = Environment.GetEnvironmentVariable("DB_NAME");
+var dbUser = Environment.GetEnvironmentVariable("DB_USER");
+var dbPass = Environment.GetEnvironmentVariable("DB_PASS");
+
+var slackChannelId = Environment.GetEnvironmentVariable("SLACK_CHANNEL_ID");
+var slackToken = Environment.GetEnvironmentVariable("SLACK_TOKEN");
+
+builder.Configuration["Slack:ChannelId"] = slackChannelId;
+builder.Configuration["Slack:Token"] = slackToken;
+
+var connectionString = $"Server=localhost;Database={dbName};User={dbUser};Password={dbPass};";
+
+// Set the connection string in the configuration
+builder.Configuration["ConnectionStrings:DefaultConnection"] = connectionString;
 
 // Add CORS policy
 builder.Services.AddCors(options =>
@@ -22,9 +35,10 @@ builder.Services.AddCors(options =>
 });
 
 // Get the JWT key from configuration
-var jwtKey = builder.Configuration["JwtSettings:SigningKey"]
-    ?? throw new ArgumentNullException("JwtSettings:SigningKey", "JWT Signing Key not found in configuration.");
-var keyBytes = Encoding.ASCII.GetBytes(jwtKey);
+var jwtSigningKey = Environment.GetEnvironmentVariable("JWT_SIGNING_KEY")
+    ?? throw new ArgumentNullException("JWT_SIGNING_KEY", "JWT Signing Key not found in environment.");
+builder.Configuration["JwtSettings:SigningKey"] = jwtSigningKey;
+var keyBytes = Encoding.ASCII.GetBytes(jwtSigningKey);
 
 // Configure MySQL Database
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -56,6 +70,10 @@ builder.Services.AddSwaggerGen(c =>
 // Add HTTP client factory
 builder.Services.AddHttpClient();
 
+// Register Slack service
+builder.Services.AddSingleton<SlackService>();
+builder.Services.Configure<SlackOptions>(builder.Configuration.GetSection("Slack"));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline
@@ -86,5 +104,22 @@ app.UseSwaggerUI(); // Swagger UI
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+
+// Check database connection
+using (var scope = builder.Services.BuildServiceProvider().CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    try
+    {
+        if (db.Database.CanConnect())
+            Console.WriteLine("Database connection successful!");
+        else
+            Console.WriteLine("Database connection failed!");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Database connection failed: " + ex.Message);
+    }
+}
 
 app.Run();
