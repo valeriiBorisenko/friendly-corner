@@ -8,3 +8,6 @@ obj/
 
 # Ignore user-specific files (Windows)
 Thumbs.db
+
+# Ignore environment files
+.env
