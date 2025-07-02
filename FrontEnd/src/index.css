@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap");
 
 :root {
   --clr-font-light: #fff5e9;
@@ -26,11 +26,10 @@ html {
   overflow-x: hidden;
   height: 100%;
 
+  /* IE and Edge */
+  -ms-overflow-style: none;
 
-/* IE and Edge */
-  -ms-overflow-style: none;  
-  
-/* Firefox */
+  /* Firefox */
   scrollbar-width: none;
   /* font-family: 'DM Sans', serif; */
   font-synthesis: none;
@@ -40,7 +39,7 @@ html {
 }
 
 .no-scroll {
-/* Prevent scrolling */
+  /* Prevent scrolling */
   overflow: hidden;
 }
 

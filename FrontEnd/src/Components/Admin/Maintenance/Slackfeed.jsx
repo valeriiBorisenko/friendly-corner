@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./UserList.css";
 import axios from "axios";
 import { BASE_URL } from "../../../config"; // Import the base URL
 // import UserGallery from '../../Gallery/UserGallery';
-import './SlackFeed.css';
+import "./SlackFeed.css";
 
 /**
  * SlackFeed Component
- * 
+ *
  * This component provides a bidirectional chat interface between the website and Slack.
  * It allows users to send messages to a configured Slack channel and view messages from that channel.
  * The component automatically updates to show new messages using a polling approach.
@@ -29,28 +29,26 @@ const SlackFeed = () => {
   const fetchMessages = async () => {
     try {
       // Get authentication token from storage (persistent or session)
-      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-      
+      const token =
+        localStorage.getItem("token") || sessionStorage.getItem("token");
+
       // Make API request to get message history
-      const response = await axios.get(
-        `${BASE_URL}/api/Slack/history`, 
-        {
-          headers: { 
-            Authorization: `Bearer ${token}` 
-          }
-        }
-      );
-      
+      const response = await axios.get(`${BASE_URL}/api/Slack/history`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
       // Process response if valid
       if (response.data && response.data.messages) {
         // Get the messages array from response
         const messages = response.data.messages;
-        
+
         // Sort messages by timestamp (oldest first, newest at the bottom)
-        const sortedMessages = messages.sort((a, b) => 
-          parseFloat(a.ts) - parseFloat(b.ts)
+        const sortedMessages = messages.sort(
+          (a, b) => parseFloat(a.ts) - parseFloat(b.ts),
         );
-        
+
         // Update state with sorted messages
         setMessages(sortedMessages);
       } else {
@@ -69,12 +67,12 @@ const SlackFeed = () => {
   useEffect(() => {
     // Initial fetch when component mounts
     fetchMessages();
-    
+
     // Set up periodic polling for new messages
     const interval = setInterval(() => {
       fetchMessages();
     }, 10000); // Poll every 10 seconds
-    
+
     // Clean up interval on component unmount
     return () => clearInterval(interval);
   }, []);
@@ -85,8 +83,8 @@ const SlackFeed = () => {
    */
   useEffect(() => {
     // Get the messages container element
-    const messagesContainer = document.querySelector('.messages-container');
-    
+    const messagesContainer = document.querySelector(".messages-container");
+
     // If container exists and we have messages, scroll to bottom of container
     if (messagesContainer && messages.length > 0) {
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
@@ -109,33 +107,34 @@ const SlackFeed = () => {
     e.preventDefault();
     // Don't submit if message is empty
     if (!message.trim()) return;
-    
+
     // Set loading state and clear previous status
     setLoading(true);
     setError(null);
     setSuccess(false);
-    
+
     try {
       // Get authentication token from storage
-      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-      
+      const token =
+        localStorage.getItem("token") || sessionStorage.getItem("token");
+
       // Send message to the backend API
       await axios.post(
-        `${BASE_URL}/api/Slack/send`, 
+        `${BASE_URL}/api/Slack/send`,
         { Text: message },
-        { 
-          headers: { 
-            Authorization: `Bearer ${token}` 
-          } 
-        }
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
       );
-      
+
       // Clear the input field after successful send
       setMessage("");
       // Show success message briefly
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
-      
+
       // Fetch messages again after a delay to see the new message
       setTimeout(fetchMessages, 1000);
     } catch (err) {
@@ -157,32 +156,37 @@ const SlackFeed = () => {
     try {
       const timestamp = parseFloat(ts);
       if (isNaN(timestamp)) {
-        return ''; // Return empty string for invalid timestamps
+        return ""; // Return empty string for invalid timestamps
       }
       const date = new Date(timestamp * 1000);
-      return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      return date.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
     } catch (error) {
       console.error("Error formatting timestamp:", error);
-      return '';
+      return "";
     }
   };
 
   return (
     <div className="user-list">
       <h1 className="slack-feed-title">Samtal med Slack</h1>
-      
+
       <div className="slack-feed-container">
         {/* Message display area */}
         <div className="messages-container">
           {messages.length === 0 ? (
-            <p className="no-messages">No messages yet. Start the conversation!</p>
+            <p className="no-messages">
+              No messages yet. Start the conversation!
+            </p>
           ) : (
             messages.map((msg, index) => {
               // Extract and format message content for display
               let displayUser = msg.user || "Unknown User";
               let displayText = msg.text || "";
               let isWebMessage = false;
-              
+
               // Check if the message is from the web application
               // Web messages have format "username: message"
               const webMessageMatch = displayText.match(/^([^:]+):\s(.+)$/);
@@ -192,17 +196,23 @@ const SlackFeed = () => {
                 displayText = webMessageMatch[2];
                 isWebMessage = true;
               }
-              
+
               // Render individual message
               return (
                 <div key={index} className="message-item">
                   <div className="message-header">
                     {/* Username with visual distinction for web vs. Slack users */}
                     <span className="message-user">
-                      {isWebMessage ? <strong>{displayUser}</strong> : displayUser}
+                      {isWebMessage ? (
+                        <strong>{displayUser}</strong>
+                      ) : (
+                        displayUser
+                      )}
                     </span>
                     {/* Timestamp display */}
-                    <span className="message-time">{formatTimestamp(msg.ts)}</span>
+                    <span className="message-time">
+                      {formatTimestamp(msg.ts)}
+                    </span>
                   </div>
                   {/* Message text content */}
                   <div className="message-text">{displayText}</div>
@@ -213,7 +223,7 @@ const SlackFeed = () => {
           {/* This empty div is the target for auto-scrolling */}
           <div ref={messagesEndRef} />
         </div>
-        
+
         {/* Message input form */}
         <form onSubmit={handleSubmit} className="slack-message-form">
           <div className="form-group">
@@ -225,22 +235,22 @@ const SlackFeed = () => {
               disabled={loading}
               className="message-input"
             />
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="send-button"
               disabled={loading || !message.trim()}
             >
               {loading ? "Sending..." : "Send"}
             </button>
           </div>
-          
+
           {/* Status messages */}
           {error && <div className="error-message">{error}</div>}
-          {success && <div className="success-message">Message sent successfully!</div>}
+          {success && (
+            <div className="success-message">Message sent successfully!</div>
+          )}
         </form>
-        
       </div>
-      
     </div>
   );
 };
